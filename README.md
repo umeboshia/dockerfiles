@@ -2,7 +2,7 @@
 my docker files
 
 # how to use
-to make docker image, do this commnand at directory where dokcerfile exists
+to make docker image, do this commnand at directory where dockerfile exists
 
 `$ docker image build -t <account_name>/<image_name>:<tag> {path}`
 
