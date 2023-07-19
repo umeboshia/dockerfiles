@@ -1,18 +1,18 @@
 FROM pytorch/pytorch:1.10.0-cuda11.3-cudnn8-devel
 
 # ENVIRONENT VARIABLES
-ENV UID 19094 \
-    USER_NAME yoshimura.19094 \
-    CUDA cu113 \
-    TORCH 1.10.0
+# todo,\で繋げたらユーザー作成でエラー．
+ENV UID 19094
+ENV USER_NAME yoshimura.19094
+ENV CUDA cu113
+ENV TORCH 1.10.0
 
 # apt-get update や apt-get upgrade の前に. 参考:https://zenn.dev/takakurasato/scraps/d3e0ee6132a5c5
 RUN apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/3bf863cc.pub \
     && apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/7fa2af80.pub
 
 # install essential softwares
-RUN apt update \
-    && apt install -y vim zsh git ssh sudo language-pack-en tmux
+RUN apt update && apt install -y vim zsh git ssh sudo language-pack-en tmux
 RUN update-locale LANG=en_US.UTF-8
 
 # python 3.7.11
