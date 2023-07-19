@@ -1,0 +1,46 @@
+FROM pytorch/pytorch:1.10.0-cuda11.3-cudnn8-devel
+
+# ENVIRONENT VARIABLES
+ENV UID 19094 \
+    USER_NAME yoshimura.19094 \
+    CUDA cu113 \
+    TORCH 1.10.0
+
+# apt-get update や apt-get upgrade の前に. 参考:https://zenn.dev/takakurasato/scraps/d3e0ee6132a5c5
+RUN apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/3bf863cc.pub \
+    && apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/7fa2af80.pub
+
+# install essential softwares
+RUN apt update \
+    && apt install -y vim zsh git ssh sudo language-pack-en tmux
+RUN update-locale LANG=en_US.UTF-8
+
+# python 3.7.11
+# link to python
+RUN ln -s /opt/conda/bin/python /usr/bin/python
+
+# python -m pip install packages
+RUN python -m pip install --upgrade pip
+RUN python -m pip install numpy matplotlib pylint tqdm sentencepiece transformers scikit-learn tensorboard spacy==2.3.7 scispacy black seaborn
+
+# install optuna
+RUN apt install -y libssl-dev python3-dev libmysqlclient-dev sqlite3 && python -m pip install optuna mysqlclient scikit-optimize
+
+# user settings
+RUN adduser --uid ${UID} --force-badname --shell /bin/bash --disabled-password --no-create-home ${USER_NAME} \
+    && echo ${USER_NAME}:${USER_NAME} | chpasswd \
+    && ln -s /workspace /home/${USER_NAME} \
+    && chown ${USER_NAME}:${USER_NAME} /workspace \
+    && chmod 755 /workspace
+
+# github settings
+RUN git config --global user.email umeboshia@gmail.com
+RUN git config --global user.name umeboshia
+RUN mkdir /home/yoshimura.19094/.ssh
+COPY ~/.ssh/ /home/yoshimura.19094/
+
+USER ${USER_NAME}
+
+
+
+
