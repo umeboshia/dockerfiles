@@ -15,4 +15,4 @@ https://github.com/umeboshia/my_JaMIE
 
 `$ docker image build -t umeboshia/jamie_new:ver1 .`
 
-`$ docker run -it --name jamie_new --gpus all umeboshia/jamie_new:ver1 bash`
+`$ docker run -it -v ~/.ssh:/home/yoshimura.19094/.ssh --name jamie_new --gpus all umeboshia/jamie_new:ver1 bash`

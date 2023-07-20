@@ -36,8 +36,7 @@ RUN adduser --uid ${UID} --force-badname --shell /bin/bash --disabled-password -
 # github settings
 RUN git config --global user.email umeboshia@gmail.com
 RUN git config --global user.name umeboshia
-RUN mkdir /home/yoshimura.19094/.ssh
-COPY ~/.ssh/ /home/yoshimura.19094/.ssh/
+RUN mkdir /home/${USER_NAME}/.ssh
 
 USER ${USER_NAME}
 
