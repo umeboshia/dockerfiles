@@ -34,7 +34,7 @@ RUN python -m pip install --upgrade pip
 # user settings
 RUN adduser --uid ${UID} --force-badname --shell /bin/bash --disabled-password --no-create-home ${USER_NAME} \
     && echo ${USER_NAME}:${USER_NAME} | chpasswd \
-    && ln -s /workspace /home/${USER_NAME} \
+    && ln -s /workspace /home/${USER_NAME}/projects/project \
     && chown ${USER_NAME}:${USER_NAME} /workspace \
     && chmod 755 /workspace
 RUN usermod -aG sudo ${USER_NAME}
