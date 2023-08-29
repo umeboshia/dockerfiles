@@ -32,12 +32,13 @@ RUN python -m pip install --upgrade pip
 
 
 # user settings
-RUN adduser --uid ${UID} --force-badname --shell /bin/bash --disabled-password --no-create-home ${USER_NAME} \
-    && mkdir /home/${USER_NAME}//projects/project \
-    && echo ${USER_NAME}:${USER_NAME} | chpasswd \
-    && ln -s /workspace /home/${USER_NAME}/projects/project \
-    && chown ${USER_NAME}:${USER_NAME} /workspace \
-    && chmod 755 /workspace
+RUN adduser --uid ${UID} --force-badname --shell /bin/bash --disabled-password --no-create-home ${USER_NAME}
+RUN mkdir -p /home/${USER_NAME}/projects/project
+RUN echo ${USER_NAME}:${USER_NAME} | chpasswd
+RUN ln -s /workspace /home/${USER_NAME}/projects/project
+RUN chown ${USER_NAME}:${USER_NAME} /workspace
+RUN chmod 755 /workspace
+
 RUN usermod -aG sudo ${USER_NAME}
 RUN echo "root:passwd" | chpasswd && echo "${USER_NAME}:passwd" | chpasswd
 
