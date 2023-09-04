@@ -15,20 +15,28 @@ RUN apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/
 
 
 # install essential softwares
-RUN apt update && apt install -y vim zsh git ssh sudo language-pack-en tmux
+RUN apt update && \
+    apt install -y \
+    vim zsh git ssh sudo curl language-pack-en tmux
 RUN update-locale LANG=en_US.UTF-8
 
+# install mecab install
+RUN apt install -y \
+    mecab libmecab-dev mecab-ipadic-utf8 xz-utils file
 
 # python 3.7.11
 # link to python
 RUN ln -s /opt/conda/bin/python /usr/bin/python
 
 # python -m pip install packages
-RUN python -m pip install --upgrade pip
-# RUN python -m pip install numpy matplotlib pylint tqdm sentencepiece transformers scikit-learn tensorboard spacy==2.3.7 scispacy black seaborn
+RUN python -m pip install --upgrade pip && \
+    python -m pip install \
+    numpy matplotlib scikit-learn tensorboard pandas gensim mojimoji pyknp
+    # pylint tqdm sentencepiece transformers scikit-learn spacy==2.3.7 scispacy black seaborn
 
 # install optuna
-# RUN apt install -y libssl-dev python3-dev libmysqlclient-dev sqlite3 && python -m pip install optuna mysqlclient scikit-optimize
+RUN apt install -y libssl-dev python3-dev libmysqlclient-dev sqlite3 && \
+    python -m pip install optuna mysqlclient scikit-optimize
 
 
 # user settings
@@ -36,12 +44,16 @@ RUN adduser --uid ${UID} --force-badname --shell /bin/bash --disabled-password -
 RUN mkdir -p /home/${USER_NAME}/projects/project
 RUN echo ${USER_NAME}:${USER_NAME} | chpasswd
 RUN ln -s /workspace /home/${USER_NAME}/projects/project
-RUN chown ${USER_NAME}:${USER_NAME} /workspace
-RUN chmod 755 /workspace
 
+# ownership
+RUN chown -R ${USER_NAME}:${USER_NAME} /home/${USER_NAME}
+RUN chmod 755 /home/${USER_NAME}
+# RUN chown ${USER_NAME}:${USER_NAME} /workspace
+# RUN chmod 755 /workspace
+
+# sudo settings
 RUN usermod -aG sudo ${USER_NAME}
 RUN echo "root:passwd" | chpasswd && echo "${USER_NAME}:passwd" | chpasswd
-
 
 # github settings
 RUN git config --global user.email umeboshia@gmail.com
