@@ -29,8 +29,8 @@ RUN apt install -y \
 RUN ln -s /opt/conda/bin/python /usr/bin/python
 
 # python -m pip install packages
-RUN python -m pip install --upgrade pip && \
-    python -m pip install \
+RUN python -m pip install --upgrade pip
+RUN python -m pip install \
     numpy matplotlib scikit-learn tensorboard pandas gensim mojimoji pyknp
     # pylint tqdm sentencepiece transformers scikit-learn spacy==2.3.7 scispacy black seaborn
 
