@@ -51,7 +51,9 @@ RUN ln -s /opt/conda/bin/python /usr/bin/python
 RUN python -m pip install --upgrade pip
 RUN python -m pip install \
     numpy matplotlib scikit-learn pandas gensim mojimoji pyknp \
-    tensorboard nltk seqeval pytorch-crf apex spacy
+    tensorboard nltk seqeval pytorch-crf apex spacy \
+    git+https://github.com/ku-nlp/python-textformatting.git
+    # torch, transformers
     # pylint tqdm sentencepiece transformers scikit-learn spacy==2.3.7 scispacy black seaborn
 
 # install optuna

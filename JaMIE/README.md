@@ -15,7 +15,7 @@ https://github.com/umeboshia/my_JaMIE
 
 `$ docker image build -t umeboshia/jamie_new:ver1 .`
 
-`$ docker run -it -v ~/.ssh:/home/yoshimura.19094/.ssh -v /data/yoshimura.19094:/data --name jamie_new1 --gpus all umeboshia/jamie_new:ver1 bash`
+`$ docker run -it -v /home/yoshimura.19094/projects/research2022:/workspace -v /data/yoshimura.19094:/data --name jamie_new1 --gpus all umeboshia/jamie_new:ver1 bash`
 
 not in server:
 
