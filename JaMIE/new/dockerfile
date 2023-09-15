@@ -23,7 +23,7 @@ RUN update-locale LANG=en_US.UTF-8
 RUN apt install -y \
     mecab libmecab-dev mecab-ipadic-utf8 xz-utils file
 
-# install jumanpp-2.0.0-rc3 download
+# install jumanpp-2.0.0-rc3 download so long.
 RUN cd /tmp \
     # unzip a file
     && wget https://github.com/ku-nlp/jumanpp/releases/download/v2.0.0-rc3/jumanpp-2.0.0-rc3.tar.xz \ 
@@ -40,6 +40,7 @@ RUN cd /tmp \
     && cd /tmp \
     && rm -rf xvf jumanpp-2.0.0-rc3.tar.xz jumanpp-2.0.0-rc3 \
     && cd /
+    # デフォルトはworkspaceっぽい
     # && rm -rf /tmp/*
 
 # python 3.7.11
