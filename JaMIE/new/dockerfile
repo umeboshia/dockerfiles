@@ -13,7 +13,6 @@ ENV TORCH 1.10.0
 RUN apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/3bf863cc.pub \
     && apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/7fa2af80.pub
 
-
 # install essential softwares
 RUN apt update && \
     apt install -y \
@@ -24,6 +23,26 @@ RUN update-locale LANG=en_US.UTF-8
 RUN apt install -y \
     mecab libmecab-dev mecab-ipadic-utf8 xz-utils file
 
+# install jumanpp-2.0.0-rc3 download
+RUN cd /tmp \
+    # unzip a file
+    && wget https://github.com/ku-nlp/jumanpp/releases/download/v2.0.0-rc3/jumanpp-2.0.0-rc3.tar.xz \ 
+    && tar xvf jumanpp-2.0.0-rc3.tar.xz \
+    # cmake install
+    && apt install cmake -y \
+    # build jumanpp
+
+    && cd jumanpp-2.0.0-rc3/ \
+    && mkdir build \
+    && cd build/ \
+    && cmake .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr/local \
+    && make \
+    && make install \
+    && cd /tmp \
+    && rm -rf xvf jumanpp-2.0.0-rc3.tar.xz jumanpp-2.0.0-rc3 \
+    && cd /
+    # && rm -rf /tmp/*
+
 # python 3.7.11
 # link to python
 RUN ln -s /opt/conda/bin/python /usr/bin/python
@@ -32,7 +51,7 @@ RUN ln -s /opt/conda/bin/python /usr/bin/python
 RUN python -m pip install --upgrade pip
 RUN python -m pip install \
     numpy matplotlib scikit-learn pandas gensim mojimoji pyknp \
-    tensorboard nltk seqeval
+    tensorboard nltk seqeval pytorch-crf apex spacy
     # pylint tqdm sentencepiece transformers scikit-learn spacy==2.3.7 scispacy black seaborn
 
 # install optuna
@@ -60,6 +79,9 @@ RUN echo "root:passwd" | chpasswd && echo "${USER_NAME}:passwd" | chpasswd
 RUN git config --global user.email umeboshia@gmail.com
 RUN git config --global user.name umeboshia
 RUN mkdir /home/${USER_NAME}/.ssh
+
+# /data
+RUN mkdir /data && chown -R ${USER_NAME}:${USER_NAME} /data
 
 USER ${USER_NAME}
 
