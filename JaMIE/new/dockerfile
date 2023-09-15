@@ -31,7 +31,6 @@ RUN cd /tmp \
     # cmake install
     && apt install cmake -y \
     # build jumanpp
-
     && cd jumanpp-2.0.0-rc3/ \
     && mkdir build \
     && cd build/ \
