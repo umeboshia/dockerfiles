@@ -80,7 +80,7 @@ RUN echo "root:passwd" | chpasswd && echo "${USER_NAME}:passwd" | chpasswd
 # github settings
 RUN git config --global user.email umeboshia@gmail.com
 RUN git config --global user.name umeboshia
-RUN mkdir /home/${USER_NAME}/.ssh
+RUN mkdir /home/${USER_NAME}/.ssh && chown -R ${USER_NAME}:${USER_NAME} /home/${USER_NAME}/.ssh
 
 # /data
 RUN mkdir /data && chown -R ${USER_NAME}:${USER_NAME} /data
