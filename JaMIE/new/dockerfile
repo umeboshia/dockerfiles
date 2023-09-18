@@ -40,7 +40,7 @@ RUN cd /tmp \
     && cd /tmp \
     && rm -rf xvf jumanpp-2.0.0-rc3.tar.xz jumanpp-2.0.0-rc3 \
     && cd /
-    # デフォルトはworkspaceっぽい
+    # デフォルトPWDはworkspace
     # && rm -rf /tmp/*
 
 # python 3.7.11
@@ -53,7 +53,8 @@ RUN python -m pip install \
     numpy matplotlib scikit-learn pandas gensim mojimoji pyknp \
     tensorboard nltk seqeval pytorch-crf apex spacy mecab-python3\
     git+https://github.com/ku-nlp/python-textformatting.git
-    # torch, transformers
+    # torch, transformers==2.2.2
+    # keybert
     # pylint tqdm sentencepiece transformers scikit-learn spacy==2.3.7 scispacy black seaborn
 
 # install optuna
