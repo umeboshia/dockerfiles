@@ -13,17 +13,17 @@ ENV TORCH 1.10.0
 RUN apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/3bf863cc.pub \
     && apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/7fa2af80.pub
 
-# install essential softwares
+# install essential softwares 75.6s
 RUN apt update && \
     apt install -y \
     vim zsh git ssh sudo curl language-pack-en tmux
 RUN update-locale LANG=en_US.UTF-8
 
-# install mecab install
+# install mecab install 17.7s
 RUN apt install -y \
     mecab libmecab-dev mecab-ipadic-utf8 xz-utils file
 
-# install jumanpp-2.0.0-rc3 download so long.
+# install jumanpp-2.0.0-rc3 download so long. 323.4s
 RUN cd /tmp \
     # unzip a file
     && wget https://github.com/ku-nlp/jumanpp/releases/download/v2.0.0-rc3/jumanpp-2.0.0-rc3.tar.xz \ 
@@ -49,6 +49,7 @@ RUN ln -s /opt/conda/bin/python /usr/bin/python
 
 # python -m pip install packages
 RUN python -m pip install --upgrade pip
+# packages 85.7s
 RUN python -m pip install \
     numpy matplotlib scikit-learn pandas \ 
     gensim mojimoji pyknp tensorboard nltk seqeval pytorch-crf apex spacy mecab-python3 \
@@ -59,7 +60,7 @@ RUN python -m pip install \
     # keybert
     # pylint tqdm sentencepiece transformers scikit-learn spacy==2.3.7 scispacy black seaborn
 
-# install optuna
+# install optuna 21.2s
 RUN apt install -y libssl-dev python3-dev libmysqlclient-dev sqlite3 && \
     python -m pip install optuna mysqlclient scikit-optimize
 
