@@ -53,6 +53,7 @@ RUN python -m pip install \
     numpy matplotlib scikit-learn pandas \ 
     gensim mojimoji pyknp tensorboard nltk seqeval pytorch-crf apex spacy mecab-python3 \
     wandb \
+    ipykernel \
     git+https://github.com/ku-nlp/python-textformatting.git
     # torch, transformers==2.2.2
     # keybert
