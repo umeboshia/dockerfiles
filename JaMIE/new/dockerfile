@@ -20,8 +20,8 @@ RUN apt update && \
 RUN update-locale LANG=en_US.UTF-8
 
 # install mecab install 17.7s
-RUN apt install -y \
-    mecab libmecab-dev mecab-ipadic-utf8 xz-utils file
+# RUN apt install -y \
+#     mecab libmecab-dev mecab-ipadic-utf8 xz-utils file
 
 # install jumanpp-2.0.0-rc3 download so long. 323.4s jumanの削除
 # RUN cd /tmp \
@@ -50,8 +50,8 @@ RUN python -m pip install \
     gensim mojimoji pyknp tensorboard nltk seqeval pytorch-crf apex spacy mecab-python3 \
     wandb \
     ipykernel \
-    git+https://github.com/ku-nlp/python-textformatting.git \
-    torch transformers ipykernel 
+    torch transformers \
+    git+https://github.com/ku-nlp/python-textformatting.git
     # keybert
     # pylint tqdm sentencepiece transformers scikit-learn spacy==2.3.7 scispacy black seaborn
 
