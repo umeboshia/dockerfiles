@@ -50,9 +50,9 @@ RUN python -m pip install \
     gensim mojimoji pyknp tensorboard nltk seqeval pytorch-crf apex \
     wandb \
     ipykernel \
-    torch transformers 
+    torch transformers \ 
+    keybert
     # git+https://github.com/ku-nlp/python-textformatting.git
-    # keybert
     # pylint tqdm sentencepiece transformers scikit-learn spacy==2.3.7 scispacy black seaborn
 
 # install optuna 21.2s
