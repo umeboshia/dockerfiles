@@ -47,11 +47,11 @@ RUN python -m pip install --upgrade pip
 # packages 85.7s
 RUN python -m pip install \
     numpy matplotlib scikit-learn pandas \ 
-    gensim mojimoji pyknp tensorboard nltk seqeval pytorch-crf apex spacy mecab-python3 \
+    gensim mojimoji pyknp tensorboard nltk seqeval pytorch-crf apex \
     wandb \
     ipykernel \
-    torch transformers \
-    git+https://github.com/ku-nlp/python-textformatting.git
+    torch transformers 
+    # git+https://github.com/ku-nlp/python-textformatting.git
     # keybert
     # pylint tqdm sentencepiece transformers scikit-learn spacy==2.3.7 scispacy black seaborn
 
